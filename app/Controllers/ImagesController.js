@@ -7,8 +7,6 @@ function _drawImage() {
   document.body.style.backgroundRepeat = `no-repeat`
   document.body.style.backgroundSize = `cover`
 
-  let imgElem = document.getElementById('image')
-  imgElem.innerHTML = ProxyState.images.Template
 }
 
 function _drawClock() {

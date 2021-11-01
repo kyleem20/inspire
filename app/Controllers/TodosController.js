@@ -6,6 +6,7 @@ function _drawTodos() {
   let template = ''
   todo.forEach(t => template += t.Template)
   document.getElementById('todo-form').innerHTML = template
+  _drawCount()
 }
 
 function _drawCount() {
@@ -21,16 +22,12 @@ function _drawCount() {
 export class TodosController {
   constructor() {
     ProxyState.on('todos', _drawTodos)
-    ProxyState.on('todos', this.isChecked)
     ProxyState.on('checked', _drawCount)
-    this.isChecked()
-    this.addTodo()
-    _drawTodos()
-    _drawCount()
 
+    this.getTodo()
   }
 
-  async getTodo(id) {
+  async addTodo() {
     try {
 
       window.event.preventDefault()
@@ -39,9 +36,7 @@ export class TodosController {
         // @ts-ignore
         description: form.description.value
       }
-      await todosService.getTodo(newForm)
-
-
+      await todosService.addTodo(newForm)
       // @ts-ignore
       form.reset()
     } catch (error) {
@@ -55,10 +50,9 @@ export class TodosController {
       console.error("DeleteTodo is broken", error)
     }
   }
-  async addTodo() {
+  async getTodo() {
     try {
-
-      await todosService.addTodo()
+      await todosService.getTodo()
     } catch (error) {
       console.error("AddTodo is broken", error)
     }
@@ -66,14 +60,7 @@ export class TodosController {
 
 
 
-  async isChecked() {
-    try {
-      await todosService.isChecked()
-    } catch (error) {
-      console.error("isChecked is broken", error)
 
-    }
-  }
   async putTodo(id) {
     try {
       await todosService.putTodo(id)

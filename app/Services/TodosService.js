@@ -6,13 +6,13 @@ import { sandboxApi } from "./AxiosService.js"
 
 class TodosService {
 
-  async getTodo(newTodo) {
+  async addTodo(newTodo) {
     let result = await sandboxApi.post('/kylee/todos', newTodo)
     const results = new Todo(result.data)
     ProxyState.todos = [...ProxyState.todos, results]
   }
 
-  async addTodo() {
+  async getTodo() {
     let res = await sandboxApi.get('/kylee/todos')
     ProxyState.todos = res.data.map(t => new Todo(t))
     ProxyState.todos = ProxyState.todos
@@ -28,17 +28,11 @@ class TodosService {
 
   async putTodo(id) {
     let find = ProxyState.todos.find(f => f.id == id)
+    find.completed = !find.completed
     const res = await sandboxApi.put('kylee/todos/' + id, find)
-    find = new Todo(res.data)
     ProxyState.todos = ProxyState.todos
   }
 
-  async isChecked() {
-    const todos = ProxyState.todos
-    todos.completed = !todos.completed
-    const res = await sandboxApi.put('kylee/todos/', todos.completed)
-    ProxyState.todos = ProxyState.todos
-  }
 
 
 

@@ -23,7 +23,7 @@ export class Todo {
       return ''
     }
     return `
-    <input class=" me-2" type="checkbox" name="completed" id="completed" id="flexCheckDefault" ${this.completed ? "checked" : ' '} onclick="app.todosController.isChecked()">
+    <input class=" me-2" type="checkbox" name="completed" id="completed" id="flexCheckDefault" ${this.completed ? "checked" : ' '} onclick="app.todosController.putTodo('${this.id}')">
       <label class=" mx-2 justify-content-start" for="flexCheckDefault">
     `
   }
