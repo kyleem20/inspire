@@ -20,10 +20,10 @@ export class Todo {
   }
   get Checkedbox() {
     if (!this.id) {
-      return ``
+      return ''
     }
     return `
-    <input class=" me-2" type="checkbox" name="completed" id="completed" id="flexCheckDefault" ${this.completed ? "checked" : ' '} >
+    <input class=" me-2" type="checkbox" name="completed" id="completed" id="flexCheckDefault" ${this.completed ? "checked" : ' '} onclick="app.todosController.isChecked()">
       <label class=" mx-2 justify-content-start" for="flexCheckDefault">
     `
   }

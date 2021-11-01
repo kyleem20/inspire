@@ -33,15 +33,15 @@ class TodosService {
     ProxyState.todos = ProxyState.todos
   }
 
-  isChecked(id) {
-    let found = ProxyState.todos
-    found.forEach(f => {
-      if (f.id == id) {
-        f.completed = !f.completed
-      }
-    })
-    return ProxyState.todos
+  async isChecked() {
+    const todos = ProxyState.todos
+    todos.completed = !todos.completed
+    const res = await sandboxApi.put('kylee/todos/', todos.completed)
+    ProxyState.todos = ProxyState.todos
   }
+
+
+
 }
 
 

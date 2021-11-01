@@ -64,11 +64,13 @@ export class TodosController {
     }
   }
 
-  async isChecked(id) {
+
+
+  async isChecked() {
     try {
-      await todosService.isChecked(id)
+      await todosService.isChecked()
     } catch (error) {
-      console.error("isChecked controller is busted", error)
+      console.error("isChecked is broken", error)
 
     }
   }
